@@ -41,7 +41,7 @@ infrastructure/  → JPA, adapters, segurança, MinIO, controllers
 
 ```bash
 # Clone o repositório
-git clone https://github.com/seu-usuario/gestao-ativos-api.git
+git clone https://github.com/flavionicanor/gestao-ativos-api.git
 cd gestao-ativos-api
 
 # Sobe todos os serviços (PostgreSQL + MinIO + API)
