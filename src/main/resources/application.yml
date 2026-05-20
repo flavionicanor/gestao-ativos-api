@@ -1,0 +1,59 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: gestao-ativos-api
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/gestao_ativos
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: none # Flyway é o único responsável pelo schema
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  flyway:
+    enabled: true
+    url: jdbc:postgresql://localhost:5432/gestao_ativos
+    user: postgres
+    password: postgres
+    locations: classpath:db/migration
+
+# Bloco customizado ? lido pela MinioConfig que criaremos na Fase 6
+minio:
+  url: http://localhost:9000
+  access-key: minioadmin
+  secret-key: minioadmin
+  bucket-name: ativos
+
+# JWT ? secret em Base64 (m�nimo 256 bits para HS256)
+jwt:
+  secret: Z2VzdGFvYXRpdm9zc2VjcmV0a2V5c3VwZXJzZWN1cmFiYXNlNjRleGFtcGxlMTIz
+  expiration: 86400000  # 24 horas em milissegundos
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operations-sorter: alpha
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+logging:
+  level:
+    org.hibernate.SQL: DEBUG
+    org.springframework.transaction.interceptor: TRACE
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE

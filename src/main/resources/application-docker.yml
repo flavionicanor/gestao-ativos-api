@@ -1,0 +1,34 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://postgres:5432/gestao_ativos
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:postgres}
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: false
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  flyway:
+    enabled: true
+    url: jdbc:postgresql://postgres:5432/gestao_ativos
+    user: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:postgres}
+    locations: classpath:db/migration
+
+minio:
+  url: http://minio:9000
+  access-key: ${MINIO_ACCESS_KEY:minioadmin}
+  secret-key: ${MINIO_SECRET_KEY:minioadmin}
+  bucket-name: ${MINIO_BUCKET:ativos}
+
+jwt:
+  secret: ${JWT_SECRET:Z2VzdGFvYXRpdm9zc2VjcmV0a2V5c3VwZXJzZWN1cmFiYXNlNjRleGFtcGxlMTIz}
+  expiration: ${JWT_EXPIRATION:86400000}
+
+server:
+  port: 8080
